@@ -5,3 +5,4 @@ authors = ["LOU Xun <aquarhead@ela.build>"]
 edition = "2018"
 
 [dependencies]
+approx = "~0.3"
