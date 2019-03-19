@@ -1,4 +1,4 @@
-use approx::{AbsDiffEq, abs_diff_eq};
+use approx::{abs_diff_eq, AbsDiffEq};
 use std::f64;
 
 #[derive(Debug, PartialEq)]
@@ -18,12 +18,25 @@ impl Tuple {
         abs_diff_eq!(self.w, &0.0)
     }
 
+    fn new(x: f64, y: f64, z: f64, w: f64) -> Self {
+        Tuple { x, y, z, w }
+    }
+
     fn new_point(x: f64, y: f64, z: f64) -> Self {
         Tuple { x, y, z, w: 1.0 }
     }
 
     fn new_vector(x: f64, y: f64, z: f64) -> Self {
         Tuple { x, y, z, w: 0.0 }
+    }
+
+    fn add(&self, other: &Self) -> Self {
+        Tuple {
+            x: self.x + other.x,
+            y: self.y + other.y,
+            z: self.z + other.z,
+            w: self.w + other.w,
+        }
     }
 }
 
@@ -109,5 +122,14 @@ mod tests {
         };
 
         assert_abs_diff_eq!(p, a);
+    }
+
+    #[test]
+    fn tuple_add() {
+        let p = Tuple::new_point(3.0, -2.0, 5.0);
+        let v = Tuple::new_vector(-2.0, 3.0, 1.0);
+        let expected = Tuple::new(1.0, 1.0, 6.0, 1.0);
+
+        assert_abs_diff_eq!(expected, p.add(&v));
     }
 }
