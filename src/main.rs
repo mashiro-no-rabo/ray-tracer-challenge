@@ -66,12 +66,7 @@ mod tests {
 
     #[test]
     fn tuple_as_point() {
-        let a = Tuple {
-            x: 4.3,
-            y: -4.2,
-            z: 3.1,
-            w: 1.0,
-        };
+        let a = Tuple::new(4.3, -4.2, 3.1, 1.0);
 
         assert_abs_diff_eq!(a.x, 4.3);
         assert_abs_diff_eq!(a.y, -4.2);
@@ -83,12 +78,7 @@ mod tests {
 
     #[test]
     fn tuple_as_vector() {
-        let a = Tuple {
-            x: 4.3,
-            y: -4.2,
-            z: 3.1,
-            w: 0.0,
-        };
+        let a = Tuple::new(4.3, -4.2, 3.1, 0.0);
 
         assert_abs_diff_eq!(a.x, 4.3);
         assert_abs_diff_eq!(a.y, -4.2);
@@ -101,12 +91,7 @@ mod tests {
     #[test]
     fn create_point() {
         let p = Tuple::new_point(4.3, -4.2, 3.1);
-        let a = Tuple {
-            x: 4.3,
-            y: -4.2,
-            z: 3.1,
-            w: 1.0,
-        };
+        let a = Tuple::new(4.3, -4.2, 3.1, 1.0);
 
         assert_abs_diff_eq!(p, a);
     }
@@ -114,12 +99,7 @@ mod tests {
     #[test]
     fn create_vector() {
         let p = Tuple::new_vector(4.3, -4.2, 3.1);
-        let a = Tuple {
-            x: 4.3,
-            y: -4.2,
-            z: 3.1,
-            w: 0.0,
-        };
+        let a = Tuple::new(4.3, -4.2, 3.1, 0.0);
 
         assert_abs_diff_eq!(p, a);
     }
