@@ -1,4 +1,4 @@
-use approx::AbsDiffEq;
+use approx::{AbsDiffEq, abs_diff_eq};
 use std::f64;
 
 #[derive(Debug, PartialEq)]
@@ -11,11 +11,11 @@ struct Tuple {
 
 impl Tuple {
     fn is_point(&self) -> bool {
-        self.w.abs_diff_eq(&1.0 as &f64, f64::EPSILON)
+        abs_diff_eq!(self.w, &1.0)
     }
 
     fn is_vector(&self) -> bool {
-        self.w.abs_diff_eq(&0.0 as &f64, f64::EPSILON)
+        abs_diff_eq!(self.w, &0.0)
     }
 
     fn new_point(x: f64, y: f64, z: f64) -> Self {
