@@ -60,10 +60,10 @@ mod tests {
             w: 1.0,
         };
 
-        abs_diff_eq!(a.x, 4.3);
-        abs_diff_eq!(a.y, -4.2);
-        abs_diff_eq!(a.z, 3.1);
-        abs_diff_eq!(a.w, 1.0);
+        assert_abs_diff_eq!(a.x, 4.3);
+        assert_abs_diff_eq!(a.y, -4.2);
+        assert_abs_diff_eq!(a.z, 3.1);
+        assert_abs_diff_eq!(a.w, 1.0);
         assert!(a.is_point());
         assert!(!a.is_vector());
     }
@@ -77,10 +77,10 @@ mod tests {
             w: 0.0,
         };
 
-        abs_diff_eq!(a.x, 4.3);
-        abs_diff_eq!(a.y, -4.2);
-        abs_diff_eq!(a.z, 3.1);
-        abs_diff_eq!(a.w, 1.0);
+        assert_abs_diff_eq!(a.x, 4.3);
+        assert_abs_diff_eq!(a.y, -4.2);
+        assert_abs_diff_eq!(a.z, 3.1);
+        assert_abs_diff_eq!(a.w, 0.0);
         assert!(!a.is_point());
         assert!(a.is_vector());
     }
@@ -95,7 +95,7 @@ mod tests {
             w: 1.0,
         };
 
-        abs_diff_eq!(p, a);
+        assert_abs_diff_eq!(p, a);
     }
 
     #[test]
@@ -108,6 +108,6 @@ mod tests {
             w: 0.0,
         };
 
-        abs_diff_eq!(p, a);
+        assert_abs_diff_eq!(p, a);
     }
 }
