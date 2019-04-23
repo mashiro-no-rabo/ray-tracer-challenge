@@ -56,6 +56,24 @@ impl Tuple {
             w: -self.w,
         }
     }
+
+    fn muls(&self, scalar: f64) -> Self {
+        Tuple {
+            x: self.x * scalar,
+            y: self.y * scalar,
+            z: self.z * scalar,
+            w: self.w * scalar,
+        }
+    }
+
+    fn divs(&self, scalar: f64) -> Self {
+        Tuple {
+            x: self.x / scalar,
+            y: self.y / scalar,
+            z: self.z / scalar,
+            w: self.w / scalar,
+        }
+    }
 }
 
 impl AbsDiffEq<Tuple> for Tuple {
@@ -173,5 +191,24 @@ mod tests {
         let expected = Tuple::new(-1.0, 2.0, -3.0, 4.0);
 
         assert_abs_diff_eq!(expected, t.neg());
+    }
+
+    #[test]
+    fn tuple_mul_scalar() {
+        let a = Tuple::new(1.0, -2.0, 3.0, -4.0);
+
+        let expected = Tuple::new(3.5, -7.0, 10.5, -14.0);
+        assert_abs_diff_eq!(expected, a.muls(3.5));
+
+        let expected2 = Tuple::new(0.5, -1.0, 1.5, -2.0);
+        assert_abs_diff_eq!(expected2, a.muls(0.5));
+    }
+
+    #[test]
+    fn tuple_div_scalar() {
+        let a = Tuple::new(1.0, -2.0, 3.0, -4.0);
+
+        let expected = Tuple::new(0.5, -1.0, 1.5, -2.0);
+        assert_abs_diff_eq!(expected, a.divs(2.0));
     }
 }
