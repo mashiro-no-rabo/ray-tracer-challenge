@@ -38,6 +38,15 @@ impl Tuple {
             w: self.w + other.w,
         }
     }
+
+    fn sub(&self, other: &Self) -> Self {
+        Tuple {
+            x: self.x - other.x,
+            y: self.y - other.y,
+            z: self.z - other.z,
+            w: self.w - other.w,
+        }
+    }
 }
 
 impl AbsDiffEq<Tuple> for Tuple {
@@ -111,5 +120,14 @@ mod tests {
         let expected = Tuple::new(1.0, 1.0, 6.0, 1.0);
 
         assert_abs_diff_eq!(expected, p.add(&v));
+    }
+
+    #[test]
+    fn tuple_sub() {
+        let p1 = Tuple::new_point(3.0, 2.0, 1.0);
+        let p2 = Tuple::new_point(5.0, 6.0, 7.0);
+        let expected = Tuple::new_vector(-2.0, -4.0, -6.0);
+
+        assert_abs_diff_eq!(expected, p1.sub(&p2));
     }
 }
