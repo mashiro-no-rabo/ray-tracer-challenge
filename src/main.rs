@@ -123,9 +123,27 @@ mod tests {
     }
 
     #[test]
-    fn tuple_sub() {
+    fn tuple_sub_pp() {
         let p1 = Tuple::new_point(3.0, 2.0, 1.0);
         let p2 = Tuple::new_point(5.0, 6.0, 7.0);
+        let expected = Tuple::new_vector(-2.0, -4.0, -6.0);
+
+        assert_abs_diff_eq!(expected, p1.sub(&p2));
+    }
+
+    #[test]
+    fn tuple_sub_pv() {
+        let p1 = Tuple::new_point(3.0, 2.0, 1.0);
+        let p2 = Tuple::new_vector(5.0, 6.0, 7.0);
+        let expected = Tuple::new_point(-2.0, -4.0, -6.0);
+
+        assert_abs_diff_eq!(expected, p1.sub(&p2));
+    }
+
+    #[test]
+    fn tuple_sub_vv() {
+        let p1 = Tuple::new_vector(3.0, 2.0, 1.0);
+        let p2 = Tuple::new_vector(5.0, 6.0, 7.0);
         let expected = Tuple::new_vector(-2.0, -4.0, -6.0);
 
         assert_abs_diff_eq!(expected, p1.sub(&p2));
