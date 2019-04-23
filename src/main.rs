@@ -47,6 +47,15 @@ impl Tuple {
             w: self.w - other.w,
         }
     }
+
+    fn neg(&self) -> Self {
+        Tuple {
+            x: -self.x,
+            y: -self.y,
+            z: -self.z,
+            w: -self.w,
+        }
+    }
 }
 
 impl AbsDiffEq<Tuple> for Tuple {
@@ -147,5 +156,22 @@ mod tests {
         let expected = Tuple::new_vector(-2.0, -4.0, -6.0);
 
         assert_abs_diff_eq!(expected, p1.sub(&p2));
+    }
+
+    #[test]
+    fn tuple_neg_via_sub() {
+        let zero = Tuple::new_vector(0.0, 0.0, 0.0);
+        let v = Tuple::new_vector(1.0, -2.0, 3.0);
+        let expected = Tuple::new_vector(-1.0, 2.0, -3.0);
+
+        assert_abs_diff_eq!(expected, zero.sub(&v));
+    }
+
+    #[test]
+    fn tuple_neg() {
+        let t = Tuple::new(1.0, -2.0, 3.0, -4.0);
+        let expected = Tuple::new(-1.0, 2.0, -3.0, 4.0);
+
+        assert_abs_diff_eq!(expected, t.neg());
     }
 }
