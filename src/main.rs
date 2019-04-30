@@ -78,13 +78,25 @@ impl Tuple {
     fn magnitude(&self) -> f64 {
         (self.x.powi(2) + self.y.powi(2) + self.z.powi(2) + self.w.powi(2)).sqrt()
     }
+
+    fn normalize(&self) -> Self {
+        let m = self.magnitude();
+
+        Tuple {
+            x: self.x / m,
+            y: self.y / m,
+            z: self.z / m,
+            w: self.w / m,
+        }
+    }
 }
 
 impl AbsDiffEq<Tuple> for Tuple {
     type Epsilon = f64;
 
     fn default_epsilon() -> f64 {
-        f64::EPSILON
+        // f64::EPSILON
+        0.00001
     }
 
     fn abs_diff_eq(&self, other: &Self, epsilon: f64) -> bool {
@@ -229,5 +241,18 @@ mod tests {
             14.0_f64.sqrt(),
             Tuple::new_vector(-1.0, -2.0, -3.0).magnitude()
         );
+    }
+
+    #[test]
+    fn tuple_normalization() {
+        let v = Tuple::new_vector(4.0, 0.0, 0.0);
+        let expected = Tuple::new_vector(1.0, 0.0, 0.0);
+        assert_abs_diff_eq!(expected, v.normalize());
+
+        let v2 = Tuple::new_vector(1.0, 2.0, 3.0);
+        let expected2 = Tuple::new_vector(0.26726, 0.53452, 0.80178);
+        assert_abs_diff_eq!(expected2, v2.normalize());
+
+        assert_abs_diff_eq!(1.0, v2.normalize().magnitude());
     }
 }
