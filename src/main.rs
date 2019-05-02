@@ -89,6 +89,17 @@ impl Tuple {
             w: self.w / m,
         }
     }
+
+    fn dot(&self, other: &Self) -> f64 {
+        (self.x * other.x) + (self.y * other.y) + (self.z * other.z) + (self.w * other.w)
+    }
+
+    fn cross(&self, other: &Self) -> Self {
+        let new_x = (self.y * other.z) - (self.z * other.y);
+        let new_y = (self.z * other.x) - (self.x * other.z);
+        let new_z = (self.x * other.y) - (self.y * other.x);
+        Tuple::new_vector(new_x, new_y, new_z)
+    }
 }
 
 impl AbsDiffEq<Tuple> for Tuple {
@@ -254,5 +265,25 @@ mod tests {
         assert_abs_diff_eq!(expected2, v2.normalize());
 
         assert_abs_diff_eq!(1.0, v2.normalize().magnitude());
+    }
+
+    #[test]
+    fn tuple_dot() {
+        let a = Tuple::new_vector(1.0, 2.0, 3.0);
+        let b = Tuple::new_vector(2.0, 3.0, 4.0);
+
+        assert_abs_diff_eq!(20.0, a.dot(&b));
+    }
+
+    #[test]
+    fn tuple_cross() {
+        let a = Tuple::new_vector(1.0, 2.0, 3.0);
+        let b = Tuple::new_vector(2.0, 3.0, 4.0);
+
+        let expected = Tuple::new_vector(-1.0, 2.0, -1.0);
+        let expected_rev = Tuple::new_vector(1.0, -2.0, 1.0);
+
+        assert_abs_diff_eq!(expected, a.cross(&b));
+        assert_abs_diff_eq!(expected_rev, b.cross(&a));
     }
 }
