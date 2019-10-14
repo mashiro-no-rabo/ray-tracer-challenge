@@ -1,8 +1,8 @@
 use super::operations::TupleOperations;
 use std::f64;
 
-#[derive(Debug, PartialEq)]
-struct Color {
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Color {
   red: f64,
   green: f64,
   blue: f64,
@@ -10,11 +10,11 @@ struct Color {
 
 #[allow(dead_code)]
 impl Color {
-  fn new(red: f64, green: f64, blue: f64) -> Self {
+  pub fn new(red: f64, green: f64, blue: f64) -> Self {
     Color { red, green, blue }
   }
 
-  fn mul(&self, other: &Self) -> Self {
+  pub fn mul(&self, other: &Self) -> Self {
     Color {
       red: self.red * other.red,
       green: self.green * other.green,
