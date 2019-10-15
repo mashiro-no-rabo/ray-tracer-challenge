@@ -38,7 +38,7 @@ impl Canvas {
 
     for y in 0..self.height() {
       for x in 0..self.width() {
-        vec.push(self.pixel_at(x, y).to_pixel_32());
+        vec.push(self.pixel_at(x, y).to_argb_32());
       }
     }
 
