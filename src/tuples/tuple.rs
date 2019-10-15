@@ -4,36 +4,36 @@ use std::f64;
 use super::operations::TupleOperations;
 
 #[derive(Debug, PartialEq)]
-struct Tuple {
-  x: f64,
-  y: f64,
-  z: f64,
-  w: f64,
+pub struct Tuple {
+  pub x: f64,
+  pub y: f64,
+  pub z: f64,
+  pub w: f64,
 }
 
 #[allow(dead_code)]
 impl Tuple {
-  fn is_point(&self) -> bool {
+  pub fn is_point(&self) -> bool {
     abs_diff_eq!(self.w, &1.0)
   }
 
-  fn is_vector(&self) -> bool {
+  pub fn is_vector(&self) -> bool {
     abs_diff_eq!(self.w, &0.0)
   }
 
-  fn new(x: f64, y: f64, z: f64, w: f64) -> Self {
+  pub fn new(x: f64, y: f64, z: f64, w: f64) -> Self {
     Tuple { x, y, z, w }
   }
 
-  fn new_point(x: f64, y: f64, z: f64) -> Self {
+  pub fn new_point(x: f64, y: f64, z: f64) -> Self {
     Tuple { x, y, z, w: 1.0 }
   }
 
-  fn new_vector(x: f64, y: f64, z: f64) -> Self {
+  pub fn new_vector(x: f64, y: f64, z: f64) -> Self {
     Tuple { x, y, z, w: 0.0 }
   }
 
-  fn neg(&self) -> Self {
+  pub fn neg(&self) -> Self {
     Tuple {
       x: -self.x,
       y: -self.y,
@@ -42,7 +42,7 @@ impl Tuple {
     }
   }
 
-  fn divs(&self, scalar: f64) -> Self {
+  pub fn divs(&self, scalar: f64) -> Self {
     Tuple {
       x: self.x / scalar,
       y: self.y / scalar,
@@ -51,11 +51,11 @@ impl Tuple {
     }
   }
 
-  fn magnitude(&self) -> f64 {
+  pub fn magnitude(&self) -> f64 {
     (self.x.powi(2) + self.y.powi(2) + self.z.powi(2) + self.w.powi(2)).sqrt()
   }
 
-  fn normalize(&self) -> Self {
+  pub fn normalize(&self) -> Self {
     let m = self.magnitude();
 
     Tuple {
@@ -66,11 +66,11 @@ impl Tuple {
     }
   }
 
-  fn dot(&self, other: &Self) -> f64 {
+  pub fn dot(&self, other: &Self) -> f64 {
     (self.x * other.x) + (self.y * other.y) + (self.z * other.z) + (self.w * other.w)
   }
 
-  fn cross(&self, other: &Self) -> Self {
+  pub fn cross(&self, other: &Self) -> Self {
     let new_x = (self.y * other.z) - (self.z * other.y);
     let new_y = (self.z * other.x) - (self.x * other.z);
     let new_z = (self.x * other.y) - (self.y * other.x);

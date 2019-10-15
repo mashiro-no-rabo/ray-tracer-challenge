@@ -1,4 +1,4 @@
-use crate::tuples::color::Color;
+use crate::tuples::Color;
 
 type Row = Vec<Color>;
 
@@ -6,6 +6,7 @@ pub struct Canvas {
   pixels: Vec<Row>,
 }
 
+#[allow(dead_code)]
 impl Canvas {
   pub fn new(width: usize, height: usize) -> Self {
     Self {
@@ -30,6 +31,18 @@ impl Canvas {
 
   pub fn pixel_at(&self, x: usize, y: usize) -> Color {
     self.pixels[y][x]
+  }
+
+  pub fn to_framebuffer(&self) -> Vec<u32> {
+    let mut vec = Vec::new();
+
+    for y in 0..self.height() {
+      for x in 0..self.width() {
+        vec.push(self.pixel_at(x, y).to_pixel_32());
+      }
+    }
+
+    vec
   }
 }
 

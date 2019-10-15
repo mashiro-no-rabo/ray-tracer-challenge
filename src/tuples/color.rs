@@ -21,6 +21,14 @@ impl Color {
       blue: self.blue * other.blue,
     }
   }
+
+  pub fn to_pixel_32(&self) -> u32 {
+    const BIT8: f64 = 255_f64;
+    let red = (self.red * BIT8).ceil() as u32;
+    let green = (self.green * BIT8).ceil() as u32;
+    let blue = (self.blue * BIT8).ceil() as u32;
+    (red << 24) + (green << 16) + (blue << 8)
+  }
 }
 
 impl TupleOperations for Color {
